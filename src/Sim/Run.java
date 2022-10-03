@@ -6,7 +6,7 @@ public class Run {
 	public static void main (String [] args)
 	{
  		//Creates two links
- 		LossyLink link1 = new LossyLink(0, 0, 0);
+ 		LossyLink link1 = new LossyLink(0, 0, 25);
 		LossyLink link2 = new LossyLink(0, 0, 0);
 		
 		// Create two end hosts that will be
