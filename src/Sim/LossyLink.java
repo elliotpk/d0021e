@@ -24,12 +24,11 @@ public class LossyLink extends Link {
 			do {
 				wait = this.delay + rand.nextGaussian()*this.jitter;		//Shift the mean to delay and standard deviation to jitter
 			} while(wait < 0);
-			System.out.println("-----Delay is: " + wait);		//Temporary print
 			
 			if(rand.nextFloat() < loss) {
 				System.out.println("!!Link recv msg but dropped it!!");
 			} else {
-				System.out.println("Link recv msg, passes it through");
+				//System.out.println("Link recv msg, passes it through");
 				if (src == _connectorA)
 				{
 					send(_connectorB, ev, wait);
