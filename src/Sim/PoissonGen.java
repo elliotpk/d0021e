@@ -23,6 +23,7 @@ public class PoissonGen extends Node {
 		writer.close();
 	}
 	
+	// Method called to start sending messages, destination network, node, desired stop time and sending rate
 	public void StartSendingPoisson(int network, int node, int stopTime, int rate, int startSeq)
 	{
 		this.stopTime = stopTime;
@@ -33,6 +34,7 @@ public class PoissonGen extends Node {
 		send(this, new TimerEvent(), 0);	
 	}
 	
+	// Method to generate Poisson distributed numbers, Knuth's algorithm
 	private static int nextPoisson(double lambda) {
         double L = Math.exp(-lambda);
         Random rand = new Random();
@@ -63,7 +65,8 @@ public class PoissonGen extends Node {
 		if (ev instanceof TimerEvent)
 		{			
 			if (SimEngine.getTime() < this.stopTime)
-			{
+			{	
+				// Randomize the "packets" per second every 1 time unit 
 				if(SimEngine.getTime() >= this.i) {
 					this.i++;
 					this.timeBetween = (double)1/(nextPoisson(this.lambda));

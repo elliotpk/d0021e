@@ -54,6 +54,10 @@ public class Node extends SimEnt {
 		send(this, new TimerEvent(), 0);	
 	}
 	
+	public void scheduleChange(int newInterface, int timeInterval) {
+		send(this, new InterfaceChangeEvent(_id, newInterface), timeInterval);
+	}
+	
 //**********************************************************************************	
 	
 	// This method is called upon that an event destined for this node triggers.
@@ -74,6 +78,12 @@ public class Node extends SimEnt {
 		if (ev instanceof Message)
 		{
 			System.out.println("R: Node "+_id.networkId()+ "." + _id.nodeId() +" receives message with seq: "+((Message) ev).seq() + " at time "+SimEngine.getTime());
+		}
+		if (ev instanceof InterfaceChangeEvent) 
+		{
+			// Send request to change interface
+			System.out.println("Node request interface");
+			send(_peer, new InterfaceChangeEvent(_id, ((InterfaceChangeEvent) ev).getNewInterface()), 0);
 		}
 	}
 }

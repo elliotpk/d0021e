@@ -26,6 +26,7 @@ public class GaussGen extends Node {
 		writer.close();
 	}
 	
+	// Method called to start sending messages, destination network, node, desired stop time and rate + std.dev for gauss distribution
 	public void StartSendingGauss(int network, int node, int stopTime, int meanRate, int stdDev, int startSeq)
 	{
 		this.stopTime = stopTime;
@@ -42,7 +43,8 @@ public class GaussGen extends Node {
 		if (ev instanceof TimerEvent)
 		{			
 			if (SimEngine.getTime() < this.stopTime)
-			{
+			{	
+				// Randomize the "packets" per second every 1 time unit
 				if(SimEngine.getTime() >= this.i) {
 					this.i++;
 					this.timeBetween = 1/(Math.abs(rand.nextGaussian()*this.stdDev + this.meanRate));
@@ -51,7 +53,7 @@ public class GaussGen extends Node {
 				}
 
 				try {
-					log(Double.toString(SimEngine.getTime()), "GaussGen_Log.txt");
+					log(Double.toString(SimEngine.getTime()) + ", " + _seq, "GaussGen_Log2.txt");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
