@@ -8,12 +8,14 @@ public class Message implements Event{
 	private NetworkAddr _source;
 	private NetworkAddr _destination;
 	private int _seq=0;
+	private int _TTL;
 	
-	Message (NetworkAddr from, NetworkAddr to, int seq)
+	Message (NetworkAddr from, NetworkAddr to, int seq, int ttl)
 	{
 		_source = from;
 		_destination = to;
 		_seq=seq;
+		_TTL = ttl;
 	}
 	
 	public NetworkAddr source()
@@ -29,6 +31,14 @@ public class Message implements Event{
 	public int seq()
 	{
 		return _seq; 
+	}
+	
+	public int ttl() {
+		return _TTL;
+	}
+	
+	public void decTTL() {
+		_TTL -= 1;
 	}
 
 	public void entering(SimEnt locale)

@@ -18,11 +18,11 @@ public class Switch extends SimEnt{
 	// This method connects links to the switch and also informs the 
     // switch of the host connects to the other end of the link
 	
-	public void connectPort(int portNumber, SimEnt link, SimEnt node)
+	public void connectPort(int portNumber, SimEnt link, NetworkAddr address)
 	{
 		if (portNumber<_ports)
 		{
-			_switchTable[portNumber] = new SwitchTableEntry(link, node);
+			_switchTable[portNumber] = new SwitchTableEntry(link, address);
 		}
 		else
 			System.out.println("Trying to connect to port not in switch");
@@ -40,7 +40,7 @@ public class Switch extends SimEnt{
 		for(int i=0; i<_ports; i++)
 			if (_switchTable[i] != null)
 			{
-				if (((Node) _switchTable[i].node()).getAddr().nodeId() == nodeAddress)
+				if (((NetworkAddr) _switchTable[i].address()).nodeId() == nodeAddress)
 				{
 					port = _switchTable[i].link();
 				}

@@ -43,7 +43,7 @@ public class CBRGen extends Node {
 					e.printStackTrace();
 				}
 				_sentmsg++;
-				send(_peer, new Message(_id, new NetworkAddr(_toNetwork, _toHost),_seq),0);
+				send(_peer, new Message(_id, new NetworkAddr(_toNetwork, _toHost),_seq, maxHops),0);
 				send(this, new TimerEvent(), this.timeBetween);
 				System.out.println("S: Node "+_id.networkId()+ "." + _id.nodeId() +" sent message with seq: "+_seq + " at time "+SimEngine.getTime());
 				_seq++;

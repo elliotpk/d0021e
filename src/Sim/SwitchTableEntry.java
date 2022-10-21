@@ -7,9 +7,9 @@ package Sim;
 
 public class SwitchTableEntry extends TableEntry{
 
-	SwitchTableEntry(SimEnt link, SimEnt node)
+	SwitchTableEntry(SimEnt link, NetworkAddr address)
 	{
-		super(link, node);
+		super(link, address);
 	}
 	
 	public SimEnt link()
@@ -17,9 +17,9 @@ public class SwitchTableEntry extends TableEntry{
 		return super.link();
 	}
 
-	public SimEnt node()
+	public NetworkAddr address()
 	{
-		return super.node();
+		return super.address();
 	}
 
 }

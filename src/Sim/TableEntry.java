@@ -6,12 +6,12 @@ package Sim;
 public class TableEntry {
 
 	private SimEnt _link;
-	private SimEnt _node;
+	private NetworkAddr _address;
 	
-	TableEntry(SimEnt link, SimEnt node)
+	TableEntry(SimEnt link, NetworkAddr address)
 	{
 		_link=link;
-		_node=node;
+		_address=address;
 	}
 	
 	protected SimEnt link()
@@ -19,9 +19,9 @@ public class TableEntry {
 		return _link;
 	}
 
-	protected SimEnt node()
+	protected NetworkAddr address()
 	{
-		return _node;
+		return _address;
 	}
 	
 }
