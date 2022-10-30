@@ -17,7 +17,7 @@ public class LossyLink extends Link {
 	}
 	
 	public void recv(SimEnt src, Event ev) {
-		if (ev instanceof Message)
+		if (ev instanceof Message  || ev instanceof BindingUpdate || ev instanceof BindingAck || ev instanceof RouterAdvertisement || ev instanceof RouterSolicitation || ev instanceof TCPMsg)
 		{
 			Random rand = new Random();
 			double wait;

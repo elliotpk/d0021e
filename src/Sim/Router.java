@@ -73,7 +73,9 @@ public class Router extends SimEnt {
 				}
 		}
 		if (routerInterface == null) {
-			routerInterface = nextHop.link();
+			if(nextHop.link() != null) {
+				routerInterface = nextHop.link();			
+			}
 		}
 		return routerInterface;
 	}
@@ -296,6 +298,10 @@ public class Router extends SimEnt {
 				return;
 			}
 			SimEnt sendTo = getInterface(((Message) event).source());
+			if(sendTo == null) {
+				System.out.println("Router #"+ this._routerAddr.networkId() +": No destination found");
+				return;
+			}
 			send(sendTo, new BindingAck(_routerAddr, temp.source(), temp.seq(), 1), 0);
 			System.out.println("Router #" + this._routerAddr.networkId() + ": Sending binding ACK");
 			return;
@@ -321,11 +327,19 @@ public class Router extends SimEnt {
 																									// destination to
 																									// the CoA
 				sendNext = getInterface(newMsg.destination());
+				if(sendNext == null) {
+					System.out.println("Router #"+ this._routerAddr.networkId() +": No destination found");
+					return;
+				}
 				System.out.println("Router #" + this._routerAddr.networkId() + ": Tunnels to node: "
 						+ newMsg.destination().networkId() + "." + newMsg.destination().nodeId());
 				send(sendNext, newMsg, _now);
 			} else {
 				sendNext = getInterface(((Message) event).destination());
+				if(sendNext == null) {
+					System.out.println("Router #"+ this._routerAddr.networkId() +": No destination found");
+					return;
+				}
 				System.out.println("Router #" + this._routerAddr.networkId() + ": Sends to node: "
 						+ ((Message) event).destination().networkId() + "." + ((Message) event).destination().nodeId());
 				send(sendNext, event, _now);

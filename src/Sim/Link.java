@@ -37,7 +37,7 @@ public class Link extends SimEnt{
 	
 	public void recv(SimEnt src, Event ev)
 	{
-		if (ev instanceof Message  || ev instanceof BindingUpdate || ev instanceof BindingAck || ev instanceof RouterAdvertisement || ev instanceof RouterSolicitation)
+		if (ev instanceof Message  || ev instanceof BindingUpdate || ev instanceof BindingAck || ev instanceof RouterAdvertisement || ev instanceof RouterSolicitation || ev instanceof TCPMsg)
 		{
 			if (src == _connectorA)
 			{
